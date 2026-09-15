@@ -118,6 +118,16 @@
             font-weight: 400;
         }
 
+        /* إخفاء أسهم حقول الأرقام في المتصفحات */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield; 
+        }
+
         .radio-group {
             display: flex;
             border-radius: 8px;
@@ -558,13 +568,15 @@
             <!-- رقم الهوية / الإقامة -->
             <div class="form-group">
                 <label>رقم الهوية / الإقامة</label>
-                <input type="text" id="id-input" class="form-control" placeholder="رقم الهوية أو الإقامة" maxlength="10">
+                <!-- تم التعديل إلى type="number" وإضافة inputmode="numeric" وoninput لتحديد الطول -->
+                <input type="number" inputmode="numeric" id="id-input" class="form-control" placeholder="رقم الهوية أو الإقامة" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);">
             </div>
 
             <!-- رقم الجوال -->
             <div class="form-group">
                 <label>رقم الجوال</label>
-                <input type="tel" id="phone-input" class="form-control" placeholder="05XXXXXXXX" maxlength="10" dir="ltr" style="text-align: right;">
+                <!-- تم التعديل إلى type="number" وإضافة inputmode="numeric" وoninput لتحديد الطول -->
+                <input type="number" inputmode="numeric" id="phone-input" class="form-control" placeholder="05XXXXXXXX" dir="ltr" style="text-align: right;" oninput="if(this.value.length > 10) this.value = this.value.slice(0, 10);">
             </div>
 
             <div class="radio-group">
@@ -579,7 +591,8 @@
             <div class="form-group">
                 <label>الرقم التسلسلي</label>
                 <div class="input-icon-container">
-                    <input type="text" class="form-control" placeholder="الرقم التسلسلي">
+                    <!-- تم التعديل إلى type="number" وإضافة inputmode="numeric" -->
+                    <input type="number" inputmode="numeric" class="form-control" placeholder="الرقم التسلسلي">
                     <div class="icon-left">i</div>
                 </div>
             </div>
@@ -587,7 +600,8 @@
             <div class="form-group">
                 <label>رمز التحقق</label>
                 <div class="captcha-container">
-                    <input type="text" id="captcha-input" class="form-control" style="background-color: white;" placeholder="" maxlength="4" dir="ltr">
+                    <!-- تم التعديل إلى type="number" وإضافة inputmode="numeric" وoninput لتحديد الطول -->
+                    <input type="number" inputmode="numeric" id="captcha-input" class="form-control" style="background-color: white;" placeholder="" dir="ltr" oninput="if(this.value.length > 4) this.value = this.value.slice(0, 4);">
                     <div class="captcha-image" id="captcha-display">
                         <span style="color:#1500ff; text-decoration:underline; font-style:italic;">5</span>
                         <span style="color:#c44000; text-decoration:underline;">0</span>
