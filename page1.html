@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> تأمين السيارات</title>
+    <title>تأمين السيارات</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
     <style>
@@ -48,7 +48,7 @@
         .form-container {
             background-color: #ffffff;
             width: 92%;
-            max-width: 450px;
+            max-width: 480px;
             border-radius: 12px;
             margin-top: -40px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -114,7 +114,7 @@
         }
 
         .form-control::placeholder {
-            color: #e0e0e0;
+            color: #bbb;
             font-weight: 400;
         }
 
@@ -158,6 +158,7 @@
             display: inline-block;
             background-color: #fff;
             position: relative;
+            flex-shrink: 0;
         }
 
         .radio-option.active .radio-circle,
@@ -279,17 +280,33 @@
         .submit-btn:hover {
             opacity: 0.9;
         }
+
+        /* تنسيق أقسام العروض */
+        .section-title {
+            color: #1a6396;
+            font-size: 15px;
+            font-weight: 800;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #eef3f7;
+            padding-bottom: 6px;
+        }
+
         .offer-card {
-            border: 1px solid #ddd;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 15px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
             transition: all 0.3s;
-            background-color: #f9f9f9;
+            background-color: #ffffff;
+        }
+
+        .offer-card:hover {
+            border-color: #1a6396;
         }
         
         .offer-card.active {
@@ -306,19 +323,27 @@
 
         .offer-title {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
             color: #333;
+        }
+
+        .offer-subtitle {
+            font-size: 11px;
+            color: #777;
+            font-weight: 400;
+            margin-top: 2px;
         }
 
         .offer-price {
             font-weight: 900;
-            font-size: 20px;
+            font-size: 16px;
             color: #1a6396;
             direction: rtl;
+            white-space: nowrap;
         }
 
         .offer-price span {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
         }
 
@@ -326,8 +351,9 @@
             text-align: center;
             color: #1a6396;
             margin-top: 5px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 800;
+            font-size: 20px;
         }
 
         .floating-buttons {
@@ -367,7 +393,6 @@
             direction: rtl;
             box-sizing: border-box;
         }
-        
 
         .site-footer .footer-container {
             width: 100%;
@@ -522,6 +547,7 @@
         <p>المنصة الأذكى لمقارنة عروض أكثر من 20 شركة تأمين. احصل<br>على أرخص تأمين سيارات مع إصدار فوري وربط مباشر بنجم.</p>
     </div>
 
+    <!-- النموذج الرئيسي -->
     <div class="form-container" id="main-form">
         <div class="tabs">
             <div class="tab active" onclick="switchTab(this)">تأمين جديد</div>
@@ -529,9 +555,16 @@
         </div>
         
         <div class="form-content">
+            <!-- رقم الهوية / الإقامة -->
             <div class="form-group">
                 <label>رقم الهوية / الإقامة</label>
-                <input type="text" class="form-control" placeholder="رقم الهوية / الإقامة">
+                <input type="text" id="id-input" class="form-control" placeholder="رقم الهوية أو الإقامة" maxlength="10">
+            </div>
+
+            <!-- رقم الجوال -->
+            <div class="form-group">
+                <label>رقم الجوال</label>
+                <input type="tel" id="phone-input" class="form-control" placeholder="05XXXXXXXX" maxlength="10" dir="ltr" style="text-align: right;">
             </div>
 
             <div class="radio-group">
@@ -573,37 +606,103 @@
         </div>
     </div>
 
+    <!-- قسم قائمة العروض والتفاصيل -->
     <div class="form-container" id="offers-section" style="display: none; padding: 25px 20px;">
         <h2 class="offers-header">اختر العرض المناسب</h2>
         
+        <!-- القسم الأول: متوسط السعر الابتدائي (ضد الغير) -->
+        <div class="section-title">1. متوسط السعر الابتدائي (ضد الغير)</div>
+        
         <div class="offer-card" onclick="selectOffer(this)">
             <div class="offer-details">
                 <span class="radio-circle"></span>
-                <div class="offer-title">تأمين ضد الغير</div>
+                <div class="offer-title">شركة التأمين التعاونية</div>
             </div>
-            <div class="offer-price">499 <span>ر.س</span></div>
+            <div class="offer-price">650 - 700 <span>ر.س</span></div>
         </div>
         
         <div class="offer-card" onclick="selectOffer(this)">
             <div class="offer-details">
                 <span class="radio-circle"></span>
-                <div class="offer-title">تأمين شامل</div>
+                <div class="offer-title">ميدغلف</div>
             </div>
-            <div class="offer-price">1199 <span>ر.س</span></div>
+            <div class="offer-price">660 - 750 <span>ر.س</span></div>
         </div>
 
-        <button class="submit-btn" onclick="confirmOffer()" style="margin-top: 15px;">تأكيد</button>
+        <div class="offer-card" onclick="selectOffer(this)">
+            <div class="offer-details">
+                <span class="radio-circle"></span>
+                <div class="offer-title">تكافل الراجحي</div>
+            </div>
+            <div class="offer-price">650 - 700 <span>ر.س</span></div>
+        </div>
+
+        <div class="offer-card" onclick="selectOffer(this)">
+            <div class="offer-details">
+                <span class="radio-circle"></span>
+                <div class="offer-title">ولاء / أسيج</div>
+            </div>
+            <div class="offer-price">700 - 750 <span>ر.س</span></div>
+        </div>
+
+        <div class="offer-card" onclick="selectOffer(this)">
+            <div class="offer-details">
+                <span class="radio-circle"></span>
+                <div class="offer-title">الخليجية المتحدة / اتحاد الخليج</div>
+            </div>
+            <div class="offer-price">890 - 900 <span>ر.س</span></div>
+        </div>
+
+        <!-- القسم الثاني: متوسط سعر التأمين الشامل السنوي -->
+        <div class="section-title" style="margin-top: 30px;">2. متوسط سعر التأمين الشامل السنوي</div>
+        
+        <div class="offer-card" onclick="selectOffer(this)">
+            <div class="offer-details">
+                <span class="radio-circle"></span>
+                <div>
+                    <div class="offer-title">سيارات اقتصادية / مستعملة</div>
+                    <div class="offer-subtitle">(بقيمة 30,000 - 50,000 ريال)</div>
+                </div>
+            </div>
+            <div class="offer-price">1,200 - 2,200 <span>ر.س</span></div>
+        </div>
+
+        <div class="offer-card" onclick="selectOffer(this)">
+            <div class="offer-details">
+                <span class="radio-circle"></span>
+                <div>
+                    <div class="offer-title">سيارات متوسطة / جديدة</div>
+                    <div class="offer-subtitle">(بقيمة 60,000 - 100,000 ريال)</div>
+                </div>
+            </div>
+            <div class="offer-price">2,200 - 3,800 <span>ر.س</span></div>
+        </div>
+
+        <div class="offer-card" onclick="selectOffer(this)">
+            <div class="offer-details">
+                <span class="radio-circle"></span>
+                <div>
+                    <div class="offer-title">سيارات فارهة / عائلية كبيرة</div>
+                    <div class="offer-subtitle">(بقيمة 120,000 - 200,000 ريال)</div>
+                </div>
+            </div>
+            <div class="offer-price">4,000 - 7,500+ <span>ر.س</span></div>
+        </div>
+
+        <button class="submit-btn" onclick="confirmOffer()" style="margin-top: 20px;">تأكيد الاختيار</button>
     </div>
 
+    <!-- الأزرار العائمة -->
     <div class="floating-buttons">
         <div class="fab fab-support">
             <i class="fas fa-headset"></i>
         </div>
-        <div class="fab fab-up">
+        <div class="fab fab-up" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
             <i class="fas fa-arrow-up"></i>
         </div>
     </div>
 
+    <!-- الفوتر -->
     <footer class="site-footer">
         <div class="footer-container">
 
@@ -617,7 +716,6 @@
                 <i class="fa-solid fa-phone"></i>
             </div>
 
-
             <div class="social-section">
                 <p>تابعنا</p>
                 <div class="social-icons">
@@ -629,7 +727,6 @@
             </div>
 
             <div class="spacer"></div>
-
 
             <div class="accordion">
                 <div class="accordion-item">
@@ -650,7 +747,6 @@
                 </div>
             </div>
 
-
             <div class="payment-section">
                 <p>طرق الدفع</p>
                 <div class="payment-methods">
@@ -667,7 +763,6 @@
                 </div>
             </div>
 
-  
             <div class="legal-links">
                 <a href="#">سياسة الخصوصية</a>
                 <span>|</span>
@@ -729,8 +824,25 @@
         }
 
         function validateAndSubmit() {
+            const idInput = document.getElementById('id-input').value.trim();
+            const phoneInput = document.getElementById('phone-input').value.trim();
             const userInput = document.getElementById('captcha-input').value.trim();
             
+            // التحقق من رقم الهوية (10 أرقام وتبدأ بـ 1 أو 2)
+            const idRegex = /^[12]\d{9}$/;
+            if (!idRegex.test(idInput)) {
+                alert("يرجى إدخال رقم هوية أو إقامة صحيح يتكون من 10 أرقام ويبدأ بـ 1 أو 2.");
+                return;
+            }
+
+            // التحقق من رقم الجوال (10 أرقام وتبدأ بـ 05)
+            const phoneRegex = /^05\d{8}$/;
+            if (!phoneRegex.test(phoneInput)) {
+                alert("يرجى إدخال رقم جوال صحيح يجب ان يتكون من 10 أرقام ويبدأ بـ 05.");
+                return;
+            }
+
+            // التحقق من كود التحقق
             if (userInput === "") {
                 alert("يرجى إدخال رمز التحقق أولاً.");
                 return;
@@ -740,6 +852,7 @@
                 // إخفاء النموذج الرئيسي وإظهار قسم العروض
                 document.getElementById('main-form').style.display = 'none';
                 document.getElementById('offers-section').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 alert("رمز التحقق غير صحيح، يرجى المحاولة مرة أخرى.");
                 generateNewCaptcha();
@@ -762,7 +875,6 @@
             };
         }
 
-        // دالة تأكيد العرض والتوجيه
         function confirmOffer() {
             if (!isOfferSelected) {
                 alert("يرجى اختيار أحد العروض أولاً للمتابعة.");
@@ -770,8 +882,6 @@
             }
             
             localStorage.setItem('selectedInsuranceOffer', JSON.stringify(selectedOfferDetails));
-            
-
             window.location.href = "pay.html"; 
         }
     </script>
